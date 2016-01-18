@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
+
+    <script src="bower_components/angular/angular.js"></script>
+
+    <script src="app/js/delta-config.js"></script>
+    <script src="app/js/index-controller.js"></script>
+</head>
+<body ng-app="delta">
+    <div ng-controller="IndexController" class="col-lg-4">
+        <h2 ng-bind="app"></h2>
+        <br/>
+        <br/>
+        <input type="text" ng-model="nome" lass="form-control" >
+        <br/>
+        <br/>
+        <button ng-click="testeFuncao()" class="btn btn-primary btn-block" > Teste</button>
+        <br/>
+        <br/>
+        <span ng-style="myStyle">Delta</span>
+    </div>
+</body>
+</html>

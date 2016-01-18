@@ -1,0 +1,23 @@
+{
+  "name": "delta",
+  "ignore": [
+    "**/.*",
+    "bower_components",
+    "node_modules",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "1.4.8",
+    "bootstrap": "3.3.6",
+    "font-awesome": "~4.5.0",
+    "angular-messages": "~1.4.8",
+    "angular-ui-grid": "~3.0.7",
+    "angular-toastr": "~1.6.0"
+  },
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": ""
+}

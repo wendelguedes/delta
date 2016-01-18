@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Curso de Angular</title>
+    <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css"/>
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css"/>
+    <link rel="stylesheet" href="app/css/media-query.css"/>
+    <link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.css"/>
+
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
+    <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
+
+    <script src="app/js/delta-config.js"></script>
+    <script src="app/js/services.js"></script>
+    <script src="arquitetura/service/alert-service.js"></script>
+    <script src="arquitetura/factory/parametro-aplicacao.js"></script>
+    <script src="arquitetura/filter/maiusculo.js"></script>
+
+</head>
+<body ng-app="delta">
+    <div ng-controller="IndexController" class="container">
+        <div class="row text-center">
+            <h2 ng-bind="app"></h2>
+        </div>
+        <div class="row">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Cadrasto de pessoa <span ng-bind="ultimdaDataCadastrada"></span> </div>
+                <div class="panel-body">
+                    <form name="formPessoa" ng-submit="salvar()" novalidate>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group" ng-class="{'has-error':formPessoa.nome.$invalid && formPessoa.nome.$touched}">
+                                <label class="control-label">Nome</label>
+                                <input name="nome" type="text" class="form-control help-block" ng-model="pessoa.nome" required minlength="3" maxlength="20"/>
+                                <div ng-messages="formPessoa.nome.$error" ng-if="formPessoa.nome.$invalid && formPessoa.nome.$touched" class="alert alert-danger">
+                                    <div ng-messages-include="app/template/message.html" ></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group" ng-class="{'has-error':formPessoa.sobrenome.$invalid && formPessoa.sobrenome.$touched}">
+                                <label class="control-label">Sobrenome</label>
+                                <input name="sobrenome" type="text" class="form-control help-block" ng-model="pessoa.sobrenome" required minlength="3" maxlength="20"/>
+                                <div ng-messages="formPessoa.sobrenome.$error" ng-if="formPessoa.sobrenome.$invalid && formPessoa.sobrenome.$touched" class="text-danger">
+                                    <div ng-messages-include="app/template/message.html" ></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group" ng-class="{'has-error':formPessoa.dataNascimento.$invalid && formPessoa.dataNascimento.$touched}">
+                                <label class="control-label">Data Nascimento</label>
+                                <input name="dataNascimento" type="date" class="form-control help-block" ng-model="pessoa.dataNascimento" required/>
+                                <div ng-messages="formPessoa.dataNascimento.$error" ng-if="formPessoa.dataNascimento.$invalid && formPessoa.dataNascimento.$touched">
+                                    <div ng-message="required" >Campo Obrigatório</div>
+                                    <div ng-message="date">Data inválida</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <table class="table table-responsive table-striped" >
+                            <tr>
+                                <td>Nome</td>
+                                <td>Sobrenome</td>
+                                <td>Data de Nascimento</td>
+                            </tr>
+                            <tr ng-repeat="pessoa in listaPessoas">
+                                <td ng-bind="::pessoa.nome | maiusculo"></td>
+                                <td ng-bind="::pessoa.sobrenome"></td>
+                                <td ng-bind="::pessoa.dataNascimento | date:'dd/MM/yyyy'"></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button type="submit" class="btn btn-primary fa fa-save" > Salvar</button>
+                            <button type="button" ng-click="limpar()" class="btn btn-success fa fa-eraser" > Limpar</button>
+                            <button type="button" ng-click="excluir()" class="btn btn-danger fa fa-trash" > Excluir</button>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
