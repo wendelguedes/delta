@@ -1,1 +1,1 @@
-angular.module("delta",["ngMessages","toastr","ui.grid"]);
+angular.module("delta",["ngMessages","toastr","ui.grid","ngMaterial"]);
