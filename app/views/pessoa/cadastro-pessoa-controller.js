@@ -1,5 +1,12 @@
-angular.module("delta").controller("CadastroPessoaController", CadastroPessoaController);
+angular.module('delta').controller('CadastroPessoaController',CadastroPessoaController);
 
-function CadastroPessoaController($scope){
-    $scope.nome = "Valor informado no controller";
+function CadastroPessoaController($scope,$stateParams,alertService){
+    $scope.nome = 'Pessoa Controller';
+
+    var meuId = $stateParams.id;
+
+    if(meuId === '10'){
+        alertService.showSuccess('Parametro recebido com sucesso');
+    }
+
 }

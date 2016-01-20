@@ -1,8 +1,8 @@
 angular.module("delta").controller("IndexController", IndexController);
 
-IndexController.$inject = ["$scope","$timeout","alertService","ParametrosAplicacao","$filter"];
+IndexController.$inject = ["$scope","$timeout","alertService","ParametrosAplicacao","$filter","$rootScope","$state"];
 
-function IndexController($scope,$timeout,alertService,ParametrosAplicacao,$filter){
+function IndexController($scope,$timeout,alertService,ParametrosAplicacao,$filter, $rootScope, $state){
     $scope.app = "Meu App";
     $scope.listaPessoas = [];
     $scope.pessoa = {};
@@ -78,6 +78,31 @@ function IndexController($scope,$timeout,alertService,ParametrosAplicacao,$filte
         var style = {};
         style.backgroundColor = pessoaSelecionada.cor;
         return style;
+    }
+
+    $scope.dispararEvento = function(){
+        $rootScope.$broadcast("testeBroadcastEvent",{nome: "Wendel Guedes"})
+        $state.go("jdskfhksdhfk");
+    };
+
+    $rootScope.$on("$stateChangeStart", stateChangeStart);
+    $rootScope.$on("$stateChangeSuccess", stateChangeSuccess);
+    $rootScope.$on("$stateNotFound", stateNotFound);
+
+    function stateChangeStart(event, toState, toParams, fromState, fromParams){
+        if(toState.name === "cadastro-pessoa"){
+            alertService.showError("Você não tem permissão de acesso a tela " + toState.name);
+            event.preventDefault();
+        }
+    }
+
+    function stateChangeSuccess(event, toState, toParams, fromState, fromParams){
+        alertService.showSuccess("Carregou estado " + toState.name + " com sucesso!");
+    }
+
+    function stateNotFound(event, unfoundState, fromState, fromParams){
+        alertService.showError("Essa pagina não existe");
+        $state.go("home");
     }
 
 }

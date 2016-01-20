@@ -1,8 +1,8 @@
-angular.module("delta",["ngMessages","toastr","ui.grid","ngMaterial","ui.router", "oc.lazyLoad"]).config(config);
+angular.module("delta",["ngMessages","toastr","ui.grid","ngMaterial","ui.router","oc.lazyLoad"]).config(config);
+config.$inject = ["$stateProvider","$urlRouterProvider"];
 
-config.$inject = ["$stateProvider", "$urlRouterProvider","$ocLazyLoad"];
-s
-function config($stateProvider, $urlRouterProvider, $ocLazyLoad){
+
+function config($stateProvider, $urlRouterProvider){
     $urlRouterProvider.otherwise("/home");
     var home = {
         url: "/home",
@@ -17,16 +17,16 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoad){
     var cadastroPessoa = {
         url: "/cadastro-pessoa",
         templateUrl: "app/views/pessoa/cadastro-pessoa.html",
-        resolve:{
-            deps: function($ocLazyLoad){
-                return $ocLazyLoad.load("app/views/pessoa/cadastro-pessoa-controller.js")
+        resolve : {
+            deps : function ($ocLazyLoad) {
+                return $ocLazyLoad.load('app/views/pessoa/cadastro-pessoa-controller.js');
             }
         }
     };
 
     var pesquisaPessoa = {
         url: "/pesquisa-pessoa",
-        templateUrl: "app/views/pessoa/cadastro-pessoa.html",
+        templateUrl: "app/views/pessoa/pesquisa-pessoa.html",
         resolve:{
             deps: function($ocLazyLoad){
                 return $ocLazyLoad.load("app/views/pessoa/pesquisa-pessoa-controller.js")
@@ -38,5 +38,4 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoad){
     $stateProvider.state("menu", menu);
     $stateProvider.state("cadastro-pessoa", cadastroPessoa);
     $stateProvider.state("pesquisa-pessoa", pesquisaPessoa);
-
 }
